@@ -19,6 +19,10 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
+// view 的弹性滑动
+// mButton1 使用的是延时策略
+// mButton2 使用的是动画
+
 public class TestActivity extends Activity implements OnClickListener,
         OnLongClickListener {
 
