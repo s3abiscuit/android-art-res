@@ -5,6 +5,13 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 
+/*
+* 涉及到的知识点
+* 1 View 的坐标
+* 2 View 的滑动  TestActivity
+* 3 事件分发 DemoActivity_1 和 DemoActivity_2
+ */
+
 public class MainActivity extends Activity {
 
     @Override
