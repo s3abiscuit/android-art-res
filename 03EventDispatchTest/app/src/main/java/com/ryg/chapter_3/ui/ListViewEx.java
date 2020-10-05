@@ -38,24 +38,26 @@ public class ListViewEx extends ListView {
         int y = (int) event.getY();
 
         switch (event.getAction()) {
-            case MotionEvent.ACTION_DOWN: {
-                mHorizontalScrollViewEx2.requestDisallowInterceptTouchEvent(true);
-                break;
+        case MotionEvent.ACTION_DOWN: {
+            // 这段代码很关键, 决定了后续每个事件都要交给子View来处理, 除非后面再传入一个false
+            mHorizontalScrollViewEx2.requestDisallowInterceptTouchEvent(true);
+            break;
+        }
+        case MotionEvent.ACTION_MOVE: {
+            int deltaX = x - mLastX;
+            int deltaY = y - mLastY;
+            Log.d(TAG, "dx:" + deltaX + " dy:" + deltaY);
+            if (Math.abs(deltaX) > Math.abs(deltaY)) {
+                // 继续交给父 View 后续都由父 View 处理
+                mHorizontalScrollViewEx2.requestDisallowInterceptTouchEvent(false);
             }
-            case MotionEvent.ACTION_MOVE: {
-                int deltaX = x - mLastX;
-                int deltaY = y - mLastY;
-                Log.d(TAG, "dx:" + deltaX + " dy:" + deltaY);
-                if (Math.abs(deltaX) > Math.abs(deltaY)) {
-                    mHorizontalScrollViewEx2.requestDisallowInterceptTouchEvent(false);
-                }
-                break;
-            }
-            case MotionEvent.ACTION_UP: {
-                break;
-            }
-            default:
-                break;
+            break;
+        }
+        case MotionEvent.ACTION_UP: {
+            break;
+        }
+        default:
+            break;
         }
 
         mLastX = x;
@@ -64,3 +66,4 @@ public class ListViewEx extends ListView {
     }
 
 }
+
