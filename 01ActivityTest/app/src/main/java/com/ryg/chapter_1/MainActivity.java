@@ -20,6 +20,7 @@ public class MainActivity extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        f1();
         if (savedInstanceState != null) {
             String test = savedInstanceState.getString("extra_test");
             Log.d(TAG, "[onCreate]restore extra_test:" + test);
@@ -36,6 +37,18 @@ public class MainActivity extends Activity {
                 startActivity(intent);
             }
         });
+    }
+
+    public void f1(){
+        f2();
+    }
+
+    public void f2(){
+        f3();
+    }
+
+    public void f3(){
+        Log.d("jason", " " + 9/0);
     }
     
     @Override
