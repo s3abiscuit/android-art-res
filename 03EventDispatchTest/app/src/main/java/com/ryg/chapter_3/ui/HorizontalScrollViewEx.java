@@ -9,6 +9,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Scroller;
 
+// 外部拦截法 自定义 View 的滑动
 public class HorizontalScrollViewEx extends ViewGroup {
     private static final String TAG = "HorizontalScrollViewEx";
 
@@ -50,13 +51,13 @@ public class HorizontalScrollViewEx extends ViewGroup {
     @Override
     public boolean onInterceptTouchEvent(MotionEvent event) {
         boolean intercepted = false;
-        // 触摸点相对于父容器的坐标
         int x = (int) event.getX();
         int y = (int) event.getY();
 
         switch (event.getAction()) {
             case MotionEvent.ACTION_DOWN: {
                 intercepted = false;
+                // 上次滑动还在继续
                 if (!mScroller.isFinished()) {
                     mScroller.abortAnimation();
                     intercepted = true;
@@ -118,7 +119,9 @@ public class HorizontalScrollViewEx extends ViewGroup {
                 } else {
                     mChildIndex = (scrollX + mChildWidth / 2) / mChildWidth;
                 }
+                // 不能大于 mChildrenSize - 1 不能小于 0
                 mChildIndex = Math.max(0, Math.min(mChildIndex, mChildrenSize - 1));
+                // 惯性距离
                 int dx = mChildIndex * mChildWidth - scrollX;
                 smoothScrollBy(dx, 0);
                 mVelocityTracker.clear();
@@ -131,6 +134,19 @@ public class HorizontalScrollViewEx extends ViewGroup {
         mLastX = x;
         mLastY = y;
         return true;
+    }
+
+    private void smoothScrollBy(int dx, int dy) {
+        mScroller.startScroll(getScrollX(), 0, dx, 0, 500);
+        invalidate();
+    }
+
+    @Override
+    public void computeScroll() {
+        if (mScroller.computeScrollOffset()) {
+            scrollTo(mScroller.getCurrX(), mScroller.getCurrY());
+            postInvalidate();
+        }
     }
 
     @Override
@@ -181,22 +197,10 @@ public class HorizontalScrollViewEx extends ViewGroup {
         }
     }
 
-    private void smoothScrollBy(int dx, int dy) {
-        mScroller.startScroll(getScrollX(), 0, dx, 0, 500);
-        invalidate();
-    }
-
-    @Override
-    public void computeScroll() {
-        if (mScroller.computeScrollOffset()) {
-            scrollTo(mScroller.getCurrX(), mScroller.getCurrY());
-            postInvalidate();
-        }
-    }
-
     @Override
     protected void onDetachedFromWindow() {
         mVelocityTracker.recycle();
         super.onDetachedFromWindow();
     }
 }
+
