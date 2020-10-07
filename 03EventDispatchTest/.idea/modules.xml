@@ -1,9 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<project version="4">
-  <component name="ProjectModuleManager">
-    <modules>
-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/03EventDispatchTest.iml" filepath="$PROJECT_DIR$/.idea/modules/03EventDispatchTest.iml" group="03EventDispatchTest" />
-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/app/app.iml" filepath="$PROJECT_DIR$/.idea/modules/app/app.iml" group="03EventDispatchTest/app" />
-    </modules>
-  </component>
-</project>
