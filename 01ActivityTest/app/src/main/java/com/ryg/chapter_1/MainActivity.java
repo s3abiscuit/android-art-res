@@ -20,7 +20,7 @@ public class MainActivity extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        f1();
+        // f1();
         if (savedInstanceState != null) {
             String test = savedInstanceState.getString("extra_test");
             Log.d(TAG, "[onCreate]restore extra_test:" + test);
