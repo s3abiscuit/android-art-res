@@ -43,6 +43,7 @@ public class CircleView extends View {
         int widthSpecSize = MeasureSpec.getSize(widthMeasureSpec);
         int heightSpecMode = MeasureSpec.getMode(heightMeasureSpec);
         int heightSpecSize = MeasureSpec.getSize(heightMeasureSpec);
+        // 自定义 view 需要单独处理 wrap_content 的情况
         if (widthSpecMode == MeasureSpec.AT_MOST
                 && heightSpecMode == MeasureSpec.AT_MOST) {
             setMeasuredDimension(200, 200);
